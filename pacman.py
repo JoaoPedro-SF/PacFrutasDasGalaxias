@@ -17,13 +17,20 @@ color = 'red'
 PI = math.pi
 player_images = []
 for i in range(1, 5):
-    player_images.append(pygame.transform.scale(pygame.image.load(f'assets/player_images/{i}.png'), (45, 45)))
-blinky_img = pygame.transform.scale(pygame.image.load(f'assets/ghost_images/red.png'), (45, 45))
-pinky_img = pygame.transform.scale(pygame.image.load(f'assets/ghost_images/pink.png'), (45, 45))
-inky_img = pygame.transform.scale(pygame.image.load(f'assets/ghost_images/blue.png'), (45, 45))
-clyde_img = pygame.transform.scale(pygame.image.load(f'assets/ghost_images/orange.png'), (45, 45))
-spooked_img = pygame.transform.scale(pygame.image.load(f'assets/ghost_images/powerup.png'), (45, 45))
-dead_img = pygame.transform.scale(pygame.image.load(f'assets/ghost_images/dead.png'), (45, 45))
+    player_images.append(pygame.transform.scale(
+        pygame.image.load(f'assets/player_images/{i}.png'), (45, 45)))
+blinky_img = pygame.transform.scale(
+    pygame.image.load(f'assets/ghost_images/red.png'), (45, 45))
+pinky_img = pygame.transform.scale(pygame.image.load(
+    f'assets/ghost_images/pink.png'), (45, 45))
+inky_img = pygame.transform.scale(pygame.image.load(
+    f'assets/ghost_images/blue.png'), (45, 45))
+clyde_img = pygame.transform.scale(pygame.image.load(
+    f'assets/ghost_images/orange.png'), (45, 45))
+spooked_img = pygame.transform.scale(pygame.image.load(
+    f'assets/ghost_images/powerup.png'), (45, 45))
+dead_img = pygame.transform.scale(pygame.image.load(
+    f'assets/ghost_images/dead.png'), (45, 45))
 player_x = 450
 player_y = 663
 direction = 0
@@ -49,7 +56,8 @@ score = 0
 powerup = False
 power_counter = 0
 eaten_ghost = [False, False, False, False]
-targets = [(player_x, player_y), (player_x, player_y), (player_x, player_y), (player_x, player_y)]
+targets = [(player_x, player_y), (player_x, player_y),
+           (player_x, player_y), (player_x, player_y)]
 blinky_dead = False
 inky_dead = False
 clyde_dead = False
@@ -89,7 +97,8 @@ class Ghost:
             screen.blit(spooked_img, (self.x_pos, self.y_pos))
         else:
             screen.blit(dead_img, (self.x_pos, self.y_pos))
-        ghost_rect = pygame.rect.Rect((self.center_x - 18, self.center_y - 18), (36, 36))
+        ghost_rect = pygame.rect.Rect(
+            (self.center_x - 18, self.center_y - 18), (36, 36))
         return ghost_rect
 
     def check_collisions(self):
@@ -307,7 +316,7 @@ class Ghost:
 
     def move_blinky(self):
         # r, l, u, d
-        #vai virar sempre que colidir com paredes, caso contrário, continue em frente
+        # vai virar sempre que colidir com paredes, caso contrário, continue em frente
         if self.direction == 0:
             if self.target[0] > self.x_pos and self.turns[0]:
                 self.x_pos += self.speed
@@ -665,16 +674,19 @@ def draw_misc():
     if powerup:
         pygame.draw.circle(screen, 'blue', (140, 930), 15)
     for i in range(lives):
-        screen.blit(pygame.transform.scale(player_images[0], (30, 30)), (650 + i * 40, 915))
+        screen.blit(pygame.transform.scale(
+            player_images[0], (30, 30)), (650 + i * 40, 915))
     if game_over:
-        pygame.draw.rect(screen, 'white', [50, 200, 800, 300],0, 10)
+        pygame.draw.rect(screen, 'white', [50, 200, 800, 300], 0, 10)
         pygame.draw.rect(screen, 'dark gray', [70, 220, 760, 260], 0, 10)
-        gameover_text = font.render('Você Perdeu! Aperte Espaço para reiniciar!', True, 'red')
+        gameover_text = font.render(
+            'Você Perdeu! Aperte Espaço para reiniciar!', True, 'red')
         screen.blit(gameover_text, (100, 300))
     if game_won:
-        pygame.draw.rect(screen, 'white', [50, 200, 800, 300],0, 10)
+        pygame.draw.rect(screen, 'white', [50, 200, 800, 300], 0, 10)
         pygame.draw.rect(screen, 'dark gray', [70, 220, 760, 260], 0, 10)
-        gameover_text = font.render('Você Venceu! Aperte Espaço para reiniciar!', True, 'green')
+        gameover_text = font.render(
+            'Você Venceu! Aperte Espaço para reiniciar!', True, 'green')
         screen.blit(gameover_text, (100, 300))
 
 
@@ -700,9 +712,11 @@ def draw_board():
     for i in range(len(level)):
         for j in range(len(level[i])):
             if level[i][j] == 1:
-                pygame.draw.circle(screen, 'white', (j * num2 + (0.5 * num2), i * num1 + (0.5 * num1)), 4)
+                pygame.draw.circle(
+                    screen, 'white', (j * num2 + (0.5 * num2), i * num1 + (0.5 * num1)), 4)
             if level[i][j] == 2 and not flicker:
-                pygame.draw.circle(screen, 'blue', (j * num2 + (0.5 * num2), i * num1 + (0.5 * num1)), 10)
+                pygame.draw.circle(
+                    screen, 'blue', (j * num2 + (0.5 * num2), i * num1 + (0.5 * num1)), 10)
             if level[i][j] == 3:
                 pygame.draw.line(screen, color, (j * num2 + (0.5 * num2), i * num1),
                                  (j * num2 + (0.5 * num2), i * num1 + num1), 3)
@@ -720,7 +734,8 @@ def draw_board():
                                 3 * PI / 2, 3)
             if level[i][j] == 8:
                 pygame.draw.arc(screen, color,
-                                [(j * num2 - (num2 * 0.4)) - 2, (i * num1 - (0.4 * num1)), num2, num1], 3 * PI / 2,
+                                [(j * num2 - (num2 * 0.4)) - 2, (i * num1 -
+                                                                 (0.4 * num1)), num2, num1], 3 * PI / 2,
                                 2 * PI, 3)
             if level[i][j] == 9:
                 pygame.draw.line(screen, 'white', (j * num2, i * num1 + (0.5 * num1)),
@@ -732,11 +747,14 @@ def draw_player():
     if direction == 0:
         screen.blit(player_images[counter // 5], (player_x, player_y))
     elif direction == 1:
-        screen.blit(pygame.transform.flip(player_images[counter // 5], True, False), (player_x, player_y))
+        screen.blit(pygame.transform.flip(
+            player_images[counter // 5], True, False), (player_x, player_y))
     elif direction == 2:
-        screen.blit(pygame.transform.rotate(player_images[counter // 5], 90), (player_x, player_y))
+        screen.blit(pygame.transform.rotate(
+            player_images[counter // 5], 90), (player_x, player_y))
     elif direction == 3:
-        screen.blit(pygame.transform.rotate(player_images[counter // 5], 270), (player_x, player_y))
+        screen.blit(pygame.transform.rotate(
+            player_images[counter // 5], 270), (player_x, player_y))
 
 
 def check_position(centerx, centery):
@@ -932,7 +950,8 @@ while run:
         if 1 in level[i] or 2 in level[i]:
             game_won = False
 
-    player_circle = pygame.draw.circle(screen, 'black', (center_x, center_y), 20, 2)
+    player_circle = pygame.draw.circle(
+        screen, 'black', (center_x, center_y), 20, 2)
     draw_player()
     blinky = Ghost(blinky_x, blinky_y, targets[0], ghost_speeds[0], blinky_img, blinky_direction, blinky_dead,
                    blinky_box, 0)
@@ -943,7 +962,8 @@ while run:
     clyde = Ghost(clyde_x, clyde_y, targets[3], ghost_speeds[3], clyde_img, clyde_direction, clyde_dead,
                   clyde_box, 3)
     draw_misc()
-    targets = get_targets(blinky_x, blinky_y, inky_x, inky_y, pinky_x, pinky_y, clyde_x, clyde_y)
+    targets = get_targets(blinky_x, blinky_y, inky_x,
+                          inky_y, pinky_x, pinky_y, clyde_x, clyde_y)
 
     turns_allowed = check_position(center_x, center_y)
     if moving:
@@ -961,7 +981,8 @@ while run:
         else:
             inky_x, inky_y, inky_direction = inky.move_clyde()
         clyde_x, clyde_y, clyde_direction = clyde.move_clyde()
-    score, powerup, power_counter, eaten_ghost = check_collisions(score, powerup, power_counter, eaten_ghost)
+    score, powerup, power_counter, eaten_ghost = check_collisions(
+        score, powerup, power_counter, eaten_ghost)
     # adicionado se os fantamas comidos com poder foram comidos
     if not powerup:
         if (player_circle.colliderect(blinky.rect) and not blinky.dead) or \
@@ -1219,6 +1240,5 @@ while run:
 
     pygame.display.flip()
 pygame.quit()
-
 
 # efeitos sonoros, reinício e mensagens vencedoras, depois?
