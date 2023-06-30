@@ -6,3 +6,4 @@ height="200px" />
 </div>
 
  Este é um jogo do Pac-man com modificações para concientizar as pessoas a se alimentarem bem!
+ Se alimentar de forma saudável e equilibrada é fundamental para que possamos ter uma qualidade de vida melhor, assim podendo nos prevenir de doenças e fortalecendo nosso sistema imunológico.
